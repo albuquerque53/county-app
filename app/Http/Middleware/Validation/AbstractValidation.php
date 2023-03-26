@@ -13,18 +13,18 @@ abstract class AbstractValidation
      * Will return an array with the $paramName => $paramValue
      *
      * @param Request $request
-     * @param ...$params
+     * @param array $params
      * @return array
      */
     protected function getRouteParams(Request $request, array $params): array
     {
-        $routeParams = [];
+        $parsedParams = [];
 
         foreach ($params as $paramName) {
-            $routeParams[] = [$paramName => strtoupper($request->route($paramName))];
+            $parsedParams = array_merge($parsedParams, [$paramName => strtoupper($request->route($paramName))]);
         }
 
-        return $routeParams;
+        return $parsedParams;
     }
 
     /**
@@ -42,7 +42,7 @@ abstract class AbstractValidation
             return;
         }
 
-        throw new DomainException($this->buildErrorResponse($validation));
+        throw new DomainException($validation->errors());
     }
 
     /**

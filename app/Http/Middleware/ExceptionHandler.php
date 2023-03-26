@@ -27,7 +27,10 @@ class ExceptionHandler
         }
 
         if ($response->exception instanceof DomainException) {
-            return new JsonResponse(data: ['error' => $response->exception->getMessage()], status: 400);
+            $responseExceptionCode = $response->exception->getCode();
+            $status = $responseExceptionCode == 0 ? 400 : $responseExceptionCode;
+
+            return new JsonResponse(data: ['error' => $response->exception->getMessage()], status: $status ?? 400);
         }
 
         Log::error($response->exception->getMessage());

@@ -3,6 +3,7 @@
 namespace App\Http\Middleware\Validation;
 
 use App\Enums\CountyCodeEnum;
+use App\Exceptions\DomainException;
 use Closure;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class GetCountyInfoValidation extends AbstractValidation
      * @param Request $request
      * @param Closure $next
      * @return Response
-     * @throws ValidationException
+     * @throws DomainException
      */
     public function handle(Request $request, Closure $next): Response
     {
@@ -31,10 +32,8 @@ class GetCountyInfoValidation extends AbstractValidation
             ],
             [
                 'code' => [
-                    'error' => [
-                        'The county code informed is not valid',
-                        'Allowed values: ' . json_encode(CountyCodeEnum::cases()),
-                    ],
+                    'The county code informed is not valid',
+                    'Allowed values are: ' . $this->getAllowedCountyCodes(),
                 ]
             ]
         );
@@ -42,5 +41,12 @@ class GetCountyInfoValidation extends AbstractValidation
         $this->handleValidation($validation);
 
         return $next($request);
+    }
+
+    private function getAllowedCountyCodes(): string
+    {
+        $countyCodes = json_encode(CountyCodeEnum::cases());
+
+        return str_replace(['\\', '"'], '', $countyCodes);
     }
 }
