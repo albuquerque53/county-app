@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Services;
+
+use App\Services\Abstraction\AbstractCountyService;
+use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Log;
+use Psy\Readline\Hoa\ExceptionIdle;
+
+class BrasilApiCountyService extends AbstractCountyService
+{
+    public const BASE_URI = 'https://brasilapi.com.br';
+    private const PATH = '/api/ibge/municipios/v1/%s';
+
+    private const ERROR_GENERIC_REQUEST = 'Could not request external API for %s';
+
+    protected function queryCountyInfoByCode(string $countyCode): array
+    {
+        try {
+            $response = $this->client->get(sprintf(self::PATH, $countyCode));
+        } catch (\Exception $exception) {
+            throw new \Exception(sprintf(self::ERROR_GENERIC_REQUEST, $countyCode), 400);
+        }
+
+        return $this->decodeResponse($response);
+    }
+
+    protected function parseResponse(array $decodedResponse): array
+    {
+        $parsedResponse = [];
+
+        foreach ($decodedResponse as $county) {
+            $parsedResponse[] = [
+                'name' => $county['nome'],
+                'ibge_code' => $county['codigo_ibge'],
+            ];
+        }
+
+        return $parsedResponse;
+    }
+}
