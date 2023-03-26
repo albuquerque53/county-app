@@ -28,13 +28,13 @@ class GetCountyInfoController extends Controller
         $cacheResult = Cache::get($code);
 
         if ($cacheResult) {
-            return response()->json($cacheResult);
+            return $this->sendJsonResponse($cacheResult);
         }
 
         $data = $this->service->getInfoByCountyCode($code);
 
         Cache::put($code, $data, now()->addMinutes(10));
 
-        return response()->json($data);
+        return $this->sendJsonResponse($data);
     }
 }
