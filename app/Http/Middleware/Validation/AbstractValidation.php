@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware\Validation;
 
+use App\Exceptions\DomainException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Validation\Validator;
 
 abstract class AbstractValidation
@@ -34,7 +34,7 @@ abstract class AbstractValidation
      *
      * @param Validator $validation
      * @return void
-     * @throws ValidationException
+     * @throws DomainException
      */
     protected function handleValidation(Validator $validation): void
     {
@@ -42,7 +42,7 @@ abstract class AbstractValidation
             return;
         }
 
-        throw new ValidationException(validator: $validation, response: $this->buildErrorResponse($validation));
+        throw new DomainException($this->buildErrorResponse($validation));
     }
 
     /**

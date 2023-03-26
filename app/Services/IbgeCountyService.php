@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Exceptions\DomainException;
 use App\Services\Abstraction\AbstractCountyService;
 use Illuminate\Support\Facades\Log;
 
@@ -20,7 +21,7 @@ class IbgeCountyService extends AbstractCountyService
      *
      * @param string $countyCode
      * @return array
-     * @throws \Exception
+     * @throws DomainException
      */
     protected function queryCountyInfoByCode(string $countyCode): array
     {

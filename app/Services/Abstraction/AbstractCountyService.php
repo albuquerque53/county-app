@@ -2,6 +2,7 @@
 
 namespace App\Services\Abstraction;
 
+use App\Exceptions\DomainException;
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
 
@@ -37,11 +38,11 @@ abstract class AbstractCountyService
      *
      * @param string $countyCode
      * @return void
-     * @throws \Exception
+     * @throws DomainException
      */
     protected function throwGenericException(string $countyCode): void
     {
-        throw new \Exception(sprintf(self::GENERIC_ERROR_MESSAGE, $countyCode));
+        throw new DomainException(sprintf(self::GENERIC_ERROR_MESSAGE, $countyCode));
     }
 
     /**

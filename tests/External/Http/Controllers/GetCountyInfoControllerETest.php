@@ -45,6 +45,7 @@ class GetCountyInfoControllerETest extends TestCase
     public function testGetCountyInfoWithIbgeApiWithBlockedService(): void
     {
         $countyCode = 'AM';
+        $expectedError = ['error' => 'An error ocurred during request to external API to get info about AM'];
 
         $this->setExternalApiTo('ibge_api');
 
@@ -52,8 +53,8 @@ class GetCountyInfoControllerETest extends TestCase
 
         $response->assertStatus(400);
 
-        $decodedResponse = $response->decodeResponseJson();
-        $this->assertEquals('"An error ocurred during request to external API to get info about AM"', $decodedResponse->json);
+        $decodedResponse = json_decode($response->decodeResponseJson()->json, true);
+        $this->assertEquals($expectedError, $decodedResponse);
     }
 
     private function setExternalApiTo(string $serviceName): void

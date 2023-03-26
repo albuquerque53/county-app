@@ -85,6 +85,7 @@ class GetCountyInfoControllerFTest extends TestCase
     public function testGetCountyInfoWithBrasilApiWithErrorOnRequest(): void
     {
         $countyCode = 'AM';
+        $expectedError = ['error' => 'An error ocurred during request to external API to get info about AM'];
 
         $this->mockedClient
             ->expects($this->once())
@@ -98,8 +99,8 @@ class GetCountyInfoControllerFTest extends TestCase
 
         $response->assertStatus(400);
 
-        $decodedResponse = $response->decodeResponseJson();
-        $this->assertEquals('"An error ocurred during request to external API to get info about AM"', $decodedResponse->json);
+        $decodedResponse = json_decode($response->decodeResponseJson()->json, true);
+        $this->assertEquals($expectedError, $decodedResponse);
     }
 
     /**
@@ -114,6 +115,7 @@ class GetCountyInfoControllerFTest extends TestCase
     public function testGetCountyInfoWithIbgeApiWithBlockedService(): void
     {
         $countyCode = 'AM';
+        $expectedError = ['error' => 'An error ocurred during request to external API to get info about AM'];
 
         $this->mockedClient
             ->expects($this->never())
@@ -126,8 +128,8 @@ class GetCountyInfoControllerFTest extends TestCase
 
         $response->assertStatus(400);
 
-        $decodedResponse = $response->decodeResponseJson();
-        $this->assertEquals('"An error ocurred during request to external API to get info about AM"', $decodedResponse->json);
+        $decodedResponse = json_decode($response->decodeResponseJson()->json, true);
+        $this->assertEquals($expectedError, $decodedResponse);
     }
 
     private function setExternalApiTo(string $service): void

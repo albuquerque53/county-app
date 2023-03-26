@@ -2,13 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use App\Providers\RouteServiceProvider;
+use App\Exceptions\DomainException;
 use Closure;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ExceptionHandler
 {
@@ -23,10 +22,15 @@ class ExceptionHandler
     {
         $response =  $next($request);
 
-        if ($response->exception) {
-            return new JsonResponse(data: $response->exception->getMessage(), status: 400);
+        if (!$response->exception) {
+            return $response;
         }
 
-        return $response;
+        if ($response->exception instanceof DomainException) {
+            return new JsonResponse(data: ['error' => $response->exception->getMessage()], status: 400);
+        }
+
+        Log::error($response->exception->getMessage());
+        return new JsonResponse(data: ['error' => 'An unexpected error ocurred'], status: 500);
     }
 }
