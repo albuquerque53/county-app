@@ -15,3 +15,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+Route::get('/search/county/{code}', GetCountyInfoController::class)
+    ->middleware(GetCountyInfoValidation::class)
+    ->name('SEARCH_COUNTY_CODE');
