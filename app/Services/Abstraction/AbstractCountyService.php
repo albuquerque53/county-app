@@ -7,6 +7,8 @@ use Psr\Http\Message\ResponseInterface;
 
 abstract class AbstractCountyService
 {
+    private const GENERIC_ERROR_MESSAGE = 'An error ocurred during request to external API to get info about %s';
+
     public function __construct(protected Client $client)
     {
         //
@@ -28,6 +30,18 @@ abstract class AbstractCountyService
     protected function decodeResponse(ResponseInterface $response): array
     {
         return json_decode((string) $response->getBody(), true);
+    }
+
+    /**
+     * Will throw an Exception with a generic error message.
+     *
+     * @param string $countyCode
+     * @return void
+     * @throws \Exception
+     */
+    protected function throwGenericException(string $countyCode): void
+    {
+        throw new \Exception(sprintf(self::GENERIC_ERROR_MESSAGE, $countyCode));
     }
 
     /**
