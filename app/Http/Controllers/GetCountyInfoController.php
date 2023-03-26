@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\CountyCodeEnum;
 use App\Services\Abstraction\AbstractCountyService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Enum;
+use Illuminate\Support\Facades\Cache;
 
 class GetCountyInfoController extends Controller
 {
@@ -26,9 +23,17 @@ class GetCountyInfoController extends Controller
      */
     public function __invoke(Request $request): JsonResponse
     {
-        $code = $request->route('code');
+        $code = strtoupper($request->route('code'));
+
+        $cacheResult = Cache::get($code);
+
+        if ($cacheResult) {
+            return response()->json($cacheResult);
+        }
 
         $data = $this->service->getInfoByCountyCode($code);
+
+        Cache::put($code, $data, now()->addMinutes(10));
 
         return response()->json($data);
     }
