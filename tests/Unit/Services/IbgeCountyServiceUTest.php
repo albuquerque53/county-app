@@ -5,7 +5,7 @@ namespace Tests\Unit\Services;
 use App\Services\IbgeCountyService;
 use GuzzleHttp\Client;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class IbgeCountyServiceUTest extends TestCase
 {
@@ -14,6 +14,8 @@ class IbgeCountyServiceUTest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->mockedClient = $this->createMock(Client::class);
     }
 
@@ -34,7 +36,7 @@ class IbgeCountyServiceUTest extends TestCase
         $service = $this->createInstance();
 
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('This service cannot be used.');
+        $this->expectExceptionMessage('An error ocurred during request to external API to get info about SP');
 
         $service->getInfoByCountyCode($countyCode);
     }

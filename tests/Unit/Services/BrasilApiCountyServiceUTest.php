@@ -6,7 +6,7 @@ use App\Services\BrasilApiCountyService;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class BrasilApiCountyServiceUTest extends TestCase
 {
@@ -15,6 +15,8 @@ class BrasilApiCountyServiceUTest extends TestCase
 
     public function setUp(): void
     {
+        parent::setUp();
+
         $this->mockedClient = $this->createMock(Client::class);
     }
 
@@ -70,7 +72,7 @@ class BrasilApiCountyServiceUTest extends TestCase
         $service = $this->createInstance();
 
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('Could not request external API for SP');
+        $this->expectExceptionMessage('An error ocurred during request to external API to get info about SP');
 
         $service->getInfoByCountyCode($countyCode);
     }

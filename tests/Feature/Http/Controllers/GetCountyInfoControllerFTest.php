@@ -99,7 +99,7 @@ class GetCountyInfoControllerFTest extends TestCase
         $response->assertStatus(400);
 
         $decodedResponse = $response->decodeResponseJson();
-        $this->assertEquals('"Could not request external API for AM"', $decodedResponse->json);
+        $this->assertEquals('"An error ocurred during request to external API to get info about AM"', $decodedResponse->json);
     }
 
     /**
@@ -127,7 +127,7 @@ class GetCountyInfoControllerFTest extends TestCase
         $response->assertStatus(400);
 
         $decodedResponse = $response->decodeResponseJson();
-        $this->assertEquals('"This service cannot be used."', $decodedResponse->json);
+        $this->assertEquals('"An error ocurred during request to external API to get info about AM"', $decodedResponse->json);
     }
 
     private function setExternalApiTo(string $service): void

@@ -53,7 +53,7 @@ class GetCountyInfoControllerETest extends TestCase
         $response->assertStatus(400);
 
         $decodedResponse = $response->decodeResponseJson();
-        $this->assertEquals('"This service cannot be used."', $decodedResponse->json);
+        $this->assertEquals('"An error ocurred during request to external API to get info about AM"', $decodedResponse->json);
     }
 
     private function setExternalApiTo(string $serviceName): void

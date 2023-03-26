@@ -12,13 +12,14 @@ class BrasilApiCountyService extends AbstractCountyService
     public const BASE_URI = 'https://brasilapi.com.br';
     private const PATH = '/api/ibge/municipios/v1/%s';
 
-    private const ERROR_GENERIC_REQUEST = 'Could not request external API for %s';
+    private const ERROR_GENERIC_REQUEST = 'An error ocurred during request to external API to get info about %s';
 
     protected function queryCountyInfoByCode(string $countyCode): array
     {
         try {
             $response = $this->client->get(sprintf(self::PATH, $countyCode));
         } catch (\Exception $exception) {
+            Log::error(sprintf('Error during requests to %s for %s: %s', self::BASE_URI, $countyCode, $exception->getMessage()));
             throw new \Exception(sprintf(self::ERROR_GENERIC_REQUEST, $countyCode), 400);
         }
 

@@ -24,7 +24,8 @@ class IbgeCountyService extends AbstractCountyService
      */
     protected function queryCountyInfoByCode(string $countyCode): array
     {
-        throw new \Exception('This service cannot be used.');
+        Log::error(sprintf(self::ERROR_INSECURE_SSL, self::BASE_URI, $countyCode));
+        throw new \Exception(sprintf('An error ocurred during request to external API to get info about %s', $countyCode));
     }
 
     protected function parseResponse(array $decodedResponse): array
