@@ -9,7 +9,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator as FacadeValidator;
 use Illuminate\Validation\Rules\Enum;
-use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 
 class GetCountyInfoValidation extends AbstractValidation
