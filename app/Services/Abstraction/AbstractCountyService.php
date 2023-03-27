@@ -19,13 +19,16 @@ abstract class AbstractCountyService
      * Must request external API to get info about county
      *
      * @param string $countyCode
+     * @param int $pageNumber
+     * @param int $pageSize
      * @return array
      */
-    public function getInfoByCountyCode(string $countyCode): array
+    public function getInfoByCountyCode(string $countyCode, int $pageNumber, int $pageSize): array
     {
         $response = $this->queryCountyInfoByCode($countyCode);
+        $parsedResponse = $this->parseResponse($response);
 
-        return $this->parseResponse($response);
+        return $this->paginateResults($parsedResponse, $pageNumber, $pageSize);
     }
 
     protected function decodeResponse(ResponseInterface $response): array
@@ -43,6 +46,13 @@ abstract class AbstractCountyService
     protected function throwGenericException(string $countyCode): void
     {
         throw new DomainException(sprintf(self::GENERIC_ERROR_MESSAGE, $countyCode));
+    }
+
+    private function paginateResults(array $results, int $pageNumber, int $pageSize): array
+    {
+        $offset = ($pageNumber - 1) * $pageSize;
+
+        return array_slice($results, $offset, $pageSize);
     }
 
     /**

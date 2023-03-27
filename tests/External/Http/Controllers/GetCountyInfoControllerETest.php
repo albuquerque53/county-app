@@ -20,7 +20,7 @@ class GetCountyInfoControllerETest extends TestCase
     public function testExtenalGetCountyInfoWithBrasilApiSuccess(): void
     {
         $countyCode = 'AM';
-        $expectedResponse = self::getExpectedResultFromAPI();
+        $expectedResponse = self::getExpectedResultFromAPI('result_brasil_api_26_03_2023.json');
 
         $this->setExternalApiTo('brasil_api');
 
@@ -30,6 +30,33 @@ class GetCountyInfoControllerETest extends TestCase
 
         $this->assertEquals($expectedResponse, $response->getContent());
     }
+
+    /**
+     * Tests the scenary where:
+     * - We search information about county.
+     * - Brasil API returns the data.
+     * - We parse this data.
+     * - We return parsed and paginated data with status code 200.
+     *
+     * @return void
+     */
+    public function testExtenalGetCountyInfoWithBrasilApiWithPaginationSuccess(): void
+    {
+        $countyCode = 'AM';
+        $pageNumber = 1;
+        $pageSize = 3;
+
+        $expectedResponse = self::getExpectedResultFromAPI('result_brasil_api_pag_27_03_2023.json');
+
+        $this->setExternalApiTo('brasil_api');
+
+        $response = $this->get("search/county/{$countyCode}?page_size={$pageSize}&page_number=$pageNumber");
+
+        $response->assertStatus(200);
+
+        $this->assertEquals($expectedResponse, $response->getContent());
+    }
+
 
     /**
      * Tests scenery where:
@@ -63,9 +90,9 @@ class GetCountyInfoControllerETest extends TestCase
         );
     }
 
-    private static function getExpectedResultFromAPI(): string
+    private static function getExpectedResultFromAPI(string $fileName): string
     {
-        $json = file_get_contents(__DIR__ . '/../../data/result_brasil_api_26_03_2023.json');
+        $json = file_get_contents(__DIR__ . '/../../data/' . $fileName);
 
         return str_replace("\n", '', $json);
     }

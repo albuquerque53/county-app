@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Cache;
 
 class GetCountyInfoController extends Controller
 {
+    private const CACHE_TEMPLATE = 'C%s_P%d_S%d';
     public function __construct(private readonly AbstractCountyService $service)
     {
         //
@@ -25,16 +26,26 @@ class GetCountyInfoController extends Controller
     {
         $code = strtoupper($request->route('code'));
 
-        $cacheResult = Cache::get($code);
+        $pageNumber = $request->query('page_number') ?? 1;
+        $pageSize = $request->query('page_size') ?? 100;
+
+        $cacheName = $this->getCacheName($code, $pageNumber, $pageSize);
+
+        $cacheResult = Cache::get($cacheName);
 
         if ($cacheResult) {
             return $this->sendJsonResponse($cacheResult);
         }
 
-        $data = $this->service->getInfoByCountyCode($code);
+        $data = $this->service->getInfoByCountyCode($code, $pageNumber, $pageSize);
 
-        Cache::put($code, $data, now()->addMinutes(10));
+        Cache::put($cacheName, $data, now()->addMinutes(10));
 
         return $this->sendJsonResponse($data);
+    }
+
+    private function getCacheName(string $countyCode, int $pageNumber, int $pageSize): string
+    {
+        return sprintf(self::CACHE_TEMPLATE, $countyCode, $pageNumber, $pageSize);
     }
 }

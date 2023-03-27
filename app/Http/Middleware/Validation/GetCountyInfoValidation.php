@@ -24,10 +24,14 @@ class GetCountyInfoValidation extends AbstractValidation
      */
     public function handle(Request $request, Closure $next): Response
     {
+        $requestParameters = array_merge($this->getRouteParams($request, ['code']), $request->all());
+
         $validation = FacadeValidator::make(
-            $this->getRouteParams($request, ['code']),
+            $requestParameters,
             [
                 'code' => [new Enum(CountyCodeEnum::class)],
+                'page_number' => 'integer|max:500',
+                'page_size' => 'integer|max:2000'
             ],
             [
                 'code' => [

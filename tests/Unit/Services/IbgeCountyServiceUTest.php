@@ -27,6 +27,8 @@ class IbgeCountyServiceUTest extends TestCase
     public function testGetInfoByCountyCodeException(): void
     {
         $countyCode = 'SP';
+        $pageNumber = 1;
+        $pageSize = 100;
 
         $this->mockedClient
             ->expects($this->never())
@@ -38,7 +40,7 @@ class IbgeCountyServiceUTest extends TestCase
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('An error ocurred during request to external API to get info about SP');
 
-        $service->getInfoByCountyCode($countyCode);
+        $service->getInfoByCountyCode($countyCode, $pageNumber, $pageSize);
     }
 
     private function createInstance(): IbgeCountyService

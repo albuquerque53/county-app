@@ -72,6 +72,71 @@ class GetCountyInfoControllerFTest extends TestCase
 
         $this->assertEquals($expectedResponse, $decodedResponse);
     }
+    /**
+     * Tests the scenary where:
+     * - We search information about county.
+     * - Brasil API returns the data.
+     * - We parse this data.
+     * - We return parsed and paginated data with status code 200.
+     *
+     * @return void
+     */
+    public function testGetCountyInfoWithBrasilApiWithPaginationSuccess(): void
+    {
+        $countyCode = 'AM';
+        $pageNumber = 1;
+        $pageSize = 3;
+        $externalApiResponse = [
+            [
+                'nome' => 'ALVARAES',
+                'codigo_ibge' => '1300029',
+            ],
+            [
+                'nome' => 'AMATURA',
+                'codigo_ibge' => '1300060',
+            ],
+            [
+                'nome' => 'ANAMA',
+                'codigo_ibge' => '1300086',
+            ],
+            [
+                'nome' => 'ANORI',
+                'codigo_ibge' => '1300102',
+            ],
+        ];
+
+        $expectedResponse = [
+            [
+                'name' => 'ALVARAES',
+                'ibge_code' => '1300029',
+            ],
+            [
+                'name' => 'AMATURA',
+                'ibge_code' => '1300060',
+            ],
+            [
+                'name' => 'ANAMA',
+                'ibge_code' => '1300086',
+            ],
+            // without the last one result from API (ANORI)
+        ];
+
+        $this->mockedClient
+            ->expects($this->once())
+            ->method('get')
+            ->with('/api/ibge/municipios/v1/AM')
+            ->willReturn(new Response(status: 200, body: json_encode($externalApiResponse)));
+
+        $this->setExternalApiTo(BrasilApiCountyService::class);
+
+        $response = $this->get('search/county/' . $countyCode . '?page_number=' . $pageNumber . '&page_size=' . $pageSize);
+
+        $response->assertStatus(200);
+
+        $decodedResponse = (json_decode($response->getContent(), true));
+
+        $this->assertEquals($expectedResponse, $decodedResponse);
+    }
 
     /**
      * Tests scenery where:

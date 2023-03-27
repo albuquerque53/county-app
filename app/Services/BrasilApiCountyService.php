@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Services\Abstraction\AbstractCountyService;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
-use Psy\Readline\Hoa\ExceptionIdle;
 
 class BrasilApiCountyService extends AbstractCountyService
 {
