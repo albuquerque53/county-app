@@ -2,12 +2,13 @@
 
 > A simple application that searches county info by code.
 
-
 ## :bookmark_tabs: Table of contents
 
 - [County APP](#county-app)
-  * [:bookmark_tabs: Table of contents](#table-of-contents)
-  * [:mag: About the API ](#mag-about-the-api)
+  * [:bookmark_tabs: Table of contents](#bookmark_tabs-table-of-contents)
+  * [:mag: About the API](#mag-about-the-api)
+    + [:books: First of all, documentation!](#books-first-of-all-documentation)
+    + [:eyes: About the routes and how the API works](#eyes-about-the-routes-and-how-the-api-works)
     + [:globe_with_meridians: External APIs ](#globe_with_meridians-external-apis)
       - [:warning: Why not use IBGE API?](#warning-why-not-use-ibge-api)
   * [:coffee: Technical specification ](#coffee-technical-specification)
@@ -15,10 +16,17 @@
   * [:runner: How to run this project locally?](#runner-how-to-run-this-project-locally)
     + [:arrow_down: Instalation of vendors](#arrow_down-instalation-of-vendors)
     + [:whale: Using Sail](#whale-using-sail)
-<!-- TOC end -->
-<!-- TOC --><a name="county-app"></a>
 
-## :mag: About the API 
+## :mag: About the API
+
+### :books: First of all, documentation!
+
+I'm providing two tipes of documentation:
+
+1 - In the Open API 3.x standart, [you can access here](https://github.com/albuquerque53/county-app/blob/main/docs/open_api_specification.yml)
+2 - In a temporary developer portal that I've published with APIMATIC, [you can access here](https://www.apimatic.io/apidocs/county-app)
+
+### :eyes: About the routes and how the API works
 
 1 - There is a simple HTTP route called `SEARCH_COUNTY_CODE`:
 ```
