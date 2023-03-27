@@ -1,3 +1,5 @@
+env:
+	cp .env.example .env
 start:
 	docker-compose up -d || docker-compose up
 stop:
@@ -6,3 +8,5 @@ attach:
 	docker exec -it county_app /bin/bash
 install:
 	composer install
+key:
+	php artisan key:generate
