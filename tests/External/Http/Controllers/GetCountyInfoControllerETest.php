@@ -28,9 +28,7 @@ class GetCountyInfoControllerETest extends TestCase
 
         $response->assertStatus(200);
 
-        $decodedResponse = $response->decodeResponseJson();
-
-        $this->assertEquals($expectedResponse, $decodedResponse->json);
+        $this->assertEquals($expectedResponse, $response->getContent());
     }
 
     /**
