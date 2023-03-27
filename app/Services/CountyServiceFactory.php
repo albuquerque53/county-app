@@ -17,7 +17,6 @@ class CountyServiceFactory
         $service = self::VALID_SERVICES[$serviceName] ?? null;
 
         if (is_null($service)) {
-            // TODO: remove this exception
             throw new \Exception('The service provided is not valid');
         }
 
