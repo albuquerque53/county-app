@@ -80,22 +80,32 @@ So, this is why the [IbgeCountyService are currently blocked](https://github.com
 
 ### :arrow_down: Instalation of vendors
 
-1 - First, start the containers:
+1 - First, configure the environment:
+```sh
+make env
+```
+
+2 - Now, create the containers:
 ```sh
 make start
 ```
 
-2 - Now, get into the laravel container:
+3 - Get into the laravel container:
 ```
 make attach
 ```
 
-3 - Now, install the dependencies:
+4 - Now, install the dependencies:
 ```sh
 make install
 ```
 
-4 - Well, now you have everything installed, can exit from container:
+5 - For last, generate the application key:
+```sh
+make key
+```
+
+6 - Well, now you have everything installed, can exit from container:
 ```sh
 exit
 ```
