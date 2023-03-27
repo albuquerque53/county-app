@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\CacheHelper;
 use App\Services\Abstraction\AbstractCountyService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 
 class GetCountyInfoController extends Controller
 {
@@ -29,9 +29,7 @@ class GetCountyInfoController extends Controller
         $pageNumber = $request->query('page_number') ?? 1;
         $pageSize = $request->query('page_size') ?? 100;
 
-        $cacheName = $this->getCacheName($code, $pageNumber, $pageSize);
-
-        $cacheResult = Cache::get($cacheName);
+        $cacheResult = CacheHelper::verifyCacheForCountyCode($code, $pageNumber, $pageSize);
 
         if ($cacheResult) {
             return $this->sendJsonResponse($cacheResult);
@@ -39,13 +37,8 @@ class GetCountyInfoController extends Controller
 
         $data = $this->service->getInfoByCountyCode($code, $pageNumber, $pageSize);
 
-        Cache::put($cacheName, $data, now()->addMinutes(10));
+        CacheHelper::saveCache($code, $pageNumber, $pageNumber, $data);
 
         return $this->sendJsonResponse($data);
-    }
-
-    private function getCacheName(string $countyCode, int $pageNumber, int $pageSize): string
-    {
-        return sprintf(self::CACHE_TEMPLATE, $countyCode, $pageNumber, $pageSize);
     }
 }
