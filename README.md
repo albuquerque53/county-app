@@ -78,7 +78,7 @@ So, this is why the [IbgeCountyService are currently blocked](https://github.com
 
 > Everything is containerized, so it's pretty easy. You do not even need PHP installed on your machine, just docker.
 
-### :arrow_down: Instalation of vendors
+### :arrow_down: Setup of containers
 
 1 - First, configure the environment:
 ```sh
@@ -109,6 +109,13 @@ make key
 ```sh
 exit
 ```
+
+7 - And stopping them:
+```sh
+make stop
+```
+
+> This steps are only for first time using this project, after running that you'll have everything configured to use Laravel Sail.
 
 ### :whale: Using Sail
 
