@@ -23,7 +23,7 @@
 
 I'm providing two tipes of documentation:
 
-1 - In the Open API 3.x standart, [you can access here](https://github.com/albuquerque53/county-app/blob/main/docs/open_api_specification.yml)
+1 - In the Open API 3.x standart, [you can access here](https://github.com/albuquerque53/county-app/blob/main/docs/open_api_specification.yml) <br<
 2 - In a temporary developer portal that I've published with APIMATIC, [you can access here](https://www.apimatic.io/apidocs/county-app)
 
 ### :eyes: About the routes and how the API works
