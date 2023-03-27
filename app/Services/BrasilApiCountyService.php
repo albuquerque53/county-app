@@ -12,7 +12,6 @@ class BrasilApiCountyService extends AbstractCountyService
     public const BASE_URI = 'https://brasilapi.com.br';
     private const PATH = '/api/ibge/municipios/v1/%s';
 
-
     protected function queryCountyInfoByCode(string $countyCode): array
     {
         try {
