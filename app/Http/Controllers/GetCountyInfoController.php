@@ -37,7 +37,7 @@ class GetCountyInfoController extends Controller
 
         $data = $this->service->getInfoByCountyCode($code, $pageNumber, $pageSize);
 
-        CacheHelper::saveCache($code, $pageNumber, $pageNumber, $data);
+        CacheHelper::saveCache($code, $pageNumber, $pageSize, $data);
 
         return $this->sendJsonResponse($data);
     }
