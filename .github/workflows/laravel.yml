@@ -27,4 +27,4 @@ jobs:
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
         COUNTYSERVICE: brasil_api
-      run: vendor/bin/phpunit
+      run: vendor/bin/phpunit --testsuite=internal
