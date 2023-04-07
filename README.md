@@ -21,9 +21,9 @@
 
 ### :books: First of all, documentation!
 
-I'm providing two tipes of documentation:
+I'm providing two types of documentation:
 
-1 - In the Open API 3.x standart, [you can access here](https://github.com/albuquerque53/county-app/blob/main/docs/open_api_specification.yml) <br>
+1 - In the Open API 3.x standard, [you can access here](https://github.com/albuquerque53/county-app/blob/main/docs/open_api_specification.yml) <br>
 2 - In a temporary developer portal that I've published with APIMATIC, [you can access here](https://www.apimatic.io/apidocs/county-app)
 
 ### :eyes: About the routes and how the API works
@@ -50,7 +50,7 @@ We can define the API to search by the `COUNTY_SERVICE` environment variable, th
 
 #### :warning: Why not use IBGE API?
 
-The IBGE API is running a old SSL and TLS version that are vulnerable to renegotiation attacks as described in [RFC 5746](rfc5746).
+The IBGE API is running an old SSL and TLS version that are vulnerable to renegotiation attacks as described in [RFC 5746](rfc5746).
 
 This project is using a recent version of CURL that by default does not request URLs running vulnerable SSL/TLS Versions, you can try in our own terminal running for example: `curl https://servicodados.ibge.gov.br/api/v1/localidades/estados/sp/municipios`, you'll get something like: `OpenSSL/3.0.8: error:0A000152:SSL routines::unsafe legacy renegotiation disabled`.
 
@@ -115,7 +115,7 @@ exit
 make stop
 ```
 
-> This steps are only for first time using this project, after running that you'll have everything configured to use Laravel Sail.
+> These steps are only for first time using this project, after running that you'll have everything configured to use Laravel Sail.
 
 ### :whale: Using Sail
 
