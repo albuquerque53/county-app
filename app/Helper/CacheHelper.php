@@ -10,7 +10,7 @@ class CacheHelper
 
     public static function verifyCacheForCountyCode(string $countyCode, int $pageNumber, int $pageSize): ?array
     {
-        $cacheName = self::buildChacheName($countyCode, $pageNumber, $pageSize);
+        $cacheName = self::buildCacheName($countyCode, $pageNumber, $pageSize);
         $cacheResult = Cache::get($cacheName);
 
         if (!$cacheResult) {
@@ -22,11 +22,11 @@ class CacheHelper
 
     public static function saveCache(string $countyCode, int $pageNumber, int $pageSize, array $data): void
     {
-        $cacheName = self::buildChacheName($countyCode, $pageNumber, $pageSize);
+        $cacheName = self::buildCacheName($countyCode, $pageNumber, $pageSize);
         Cache::put($cacheName, $data, now()->addMinutes(10));
     }
 
-    private static function buildChacheName(string $countyCode, int $pageNumber, int $pageSize): string
+    private static function buildCacheName(string $countyCode, int $pageNumber, int $pageSize): string
     {
         return sprintf(self::CACHE_TEMPLATE, $countyCode, $pageNumber, $pageSize);
     }
