@@ -65,12 +65,13 @@ So, this is why the [IbgeCountyService are currently blocked](https://github.com
 ### :computer: This application is using... 
 
 - Laravel 10.
-- Swoole (by Laravel Octane).
+- Swoole (through Laravel Octane).
+- Livewire 3.
+- TailwindCss.
 - PHPUnit for unit, functional and external tests.
 - Redis for caching.
 - Docker & Docker Compose for application containerization.
 - Github Actions for CI/CD.
-- This application is hosted on Heroku (automatic deploy after success on CI/CD success).
 
 <hr>
 
