@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Services\Abstraction\AbstractCountyService;
-use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
 
 class BrasilApiCountyService extends AbstractCountyService
