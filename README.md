@@ -80,7 +80,7 @@ So, this is why the [IbgeCountyService are currently blocked](https://github.com
 - Swoole (through Laravel Octane).
 - Livewire 3.
 - TailwindCss.
-- Pest for unit and functional.
+- Pest for unit and functional tests.
 - Redis for caching.
 - Docker & Docker Compose for application containerization.
 - Github Actions for CI/CD.
