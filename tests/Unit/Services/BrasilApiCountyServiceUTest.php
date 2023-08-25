@@ -3,7 +3,6 @@
 use App\Services\BrasilApiCountyService;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
-use Mockery;
 use Mockery\MockInterface;
 
 test('get info by county code success', function () {

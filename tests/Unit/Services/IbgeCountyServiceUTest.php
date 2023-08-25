@@ -3,7 +3,6 @@
 use App\Services\IbgeCountyService;
 use GuzzleHttp\Client;
 use Mockery\MockInterface;
-use Mockery;
 
 test('get info by county code exception', function () {
     $countyCode = 'SP';
