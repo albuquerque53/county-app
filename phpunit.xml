@@ -7,9 +7,6 @@
     <testsuite name="Feature">
       <directory suffix="Test.php">./tests/Feature</directory>
     </testsuite>
-    <testsuite name="External">
-      <directory suffix="Test.php">./tests/External</directory>
-    </testsuite>
   </testsuites>
   <coverage/>
   <php>
