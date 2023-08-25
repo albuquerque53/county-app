@@ -4,6 +4,10 @@
 
 > A simple application that searches county info by code.
 
+<p align="center">
+<a href="https://github.com/albuquerque53/county-app/actions/workflows/tests.yml"><img src="https://github.com/albuquerque53/county-app/actions/workflows/tests.yml/badge.svg" alt="Tests Status"></a>
+</p>
+
 ## :bookmark_tabs: Table of contents
 
 - [County APP](#county-app)
