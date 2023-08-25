@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Helper\CacheHelper;
-use App\Services\Abstraction\AbstractCountyService;
+use App\Enums\CountyCodeEnum;
+use App\Repository\CountyRepositoryInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class GetCountyInfoController extends Controller
 {
-    private const CACHE_TEMPLATE = 'C%s_P%d_S%d';
-    public function __construct(private readonly AbstractCountyService $service)
+    public function __construct(private readonly CountyRepositoryInterface $countyRepository)
     {
         //
     }
@@ -24,21 +23,13 @@ class GetCountyInfoController extends Controller
      */
     public function __invoke(Request $request): JsonResponse
     {
-        $code = strtoupper($request->route('code'));
+        $code = CountyCodeEnum::from(strtoupper($request->route('code')));
 
         $pageNumber = $request->query('page_number') ?? 1;
         $pageSize = $request->query('page_size') ?? 100;
 
-        $cacheResult = CacheHelper::verifyCacheForCountyCode($code, $pageNumber, $pageSize);
+        $countyData = $this->countyRepository->findByCountyCode($code, $pageNumber, $pageSize);
 
-        if ($cacheResult) {
-            return $this->sendJsonResponse($cacheResult);
-        }
-
-        $data = $this->service->getInfoByCountyCode($code, $pageNumber, $pageSize);
-
-        CacheHelper::saveCache($code, $pageNumber, $pageSize, $data);
-
-        return $this->sendJsonResponse($data);
+        return response()->json($countyData);
     }
 }

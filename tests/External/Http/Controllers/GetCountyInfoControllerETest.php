@@ -24,7 +24,7 @@ class GetCountyInfoControllerETest extends TestCase
 
         $this->setExternalApiTo('brasil_api');
 
-        $response = $this->get('search/county/' . $countyCode);
+        $response = $this->get('/api/search/county/' . $countyCode);
 
         $response->assertStatus(200);
 
@@ -50,7 +50,7 @@ class GetCountyInfoControllerETest extends TestCase
 
         $this->setExternalApiTo('brasil_api');
 
-        $response = $this->get("search/county/{$countyCode}?page_size={$pageSize}&page_number=$pageNumber");
+        $response = $this->get("/api/search/county/{$countyCode}?page_size={$pageSize}&page_number=$pageNumber");
 
         $response->assertStatus(200);
 
@@ -74,7 +74,7 @@ class GetCountyInfoControllerETest extends TestCase
 
         $this->setExternalApiTo('ibge_api');
 
-        $response = $this->get('search/county/' . $countyCode);
+        $response = $this->get('/api/search/county/' . $countyCode);
 
         $response->assertStatus(400);
 

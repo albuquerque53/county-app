@@ -2,6 +2,7 @@
 
 namespace App\Helper;
 
+use App\Enums\CountyCodeEnum;
 use Illuminate\Support\Facades\Cache;
 
 class CacheHelper
@@ -10,14 +11,15 @@ class CacheHelper
 
     /**
      * Verify if there are saved cache for informed $countyCode, $pageNumber and $pageSize
-     * @param string $countyCode
+     *
+     * @param CountyCodeEnum $countyCode
      * @param int $pageNumber
      * @param int $pageSize
      * @return array|null
      */
-    public static function verifyCacheForCountyCode(string $countyCode, int $pageNumber, int $pageSize): ?array
+    public static function verifyCacheForCountyCode(CountyCodeEnum $countyCode, int $pageNumber, int $pageSize): ?array
     {
-        $cacheName = self::buildCacheName($countyCode, $pageNumber, $pageSize);
+        $cacheName = self::buildCacheName($countyCode->value, $pageNumber, $pageSize);
         $cacheResult = Cache::get($cacheName);
 
         if (!$cacheResult) {
@@ -29,15 +31,16 @@ class CacheHelper
 
     /**
      * Save the $data in cache for the informed $countyCode, $pageNumber and $pageSize
-     * @param string $countyCode
+     *
+     * @param CountyCodeEnum $countyCode
      * @param int $pageNumber
      * @param int $pageSize
      * @param array $data
      * @return void
      */
-    public static function saveCache(string $countyCode, int $pageNumber, int $pageSize, array $data): void
+    public static function saveCache(CountyCodeEnum $countyCode, int $pageNumber, int $pageSize, array $data): void
     {
-        $cacheName = self::buildCacheName($countyCode, $pageNumber, $pageSize);
+        $cacheName = self::buildCacheName($countyCode->value, $pageNumber, $pageSize);
         Cache::put($cacheName, $data, now()->addMinutes(10));
     }
 
