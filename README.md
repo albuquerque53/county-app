@@ -1,12 +1,16 @@
 # County APP
 
+![image](https://github.com/albuquerque53/county-app/assets/57183466/c81152f0-b315-474b-a7d5-23201bdeba3a)
+
 > A simple application that searches county info by code.
 
 ## :bookmark_tabs: Table of contents
 
 - [County APP](#county-app)
   * [:bookmark_tabs: Table of contents](#bookmark_tabs-table-of-contents)
-  * [:mag: About the API](#mag-about-the-api)
+  * [:desktop_computer: About the Web Application...](#desktop_computer-about-the-web-application)
+    + [:brazil: County search](#brazil-county-search)
+  * [:mag: About the API...](#mag-about-the-api)
     + [:books: First of all, documentation!](#books-first-of-all-documentation)
     + [:eyes: About the routes and how the API works](#eyes-about-the-routes-and-how-the-api-works)
     + [:globe_with_meridians: External APIs ](#globe_with_meridians-external-apis)
@@ -14,10 +18,18 @@
   * [:coffee: Technical specification ](#coffee-technical-specification)
     + [:computer: This application is using... ](#computer-this-application-is-using)
   * [:runner: How to run this project locally?](#runner-how-to-run-this-project-locally)
-    + [:arrow_down: Instalation of vendors](#arrow_down-instalation-of-vendors)
+    + [:arrow_down: Setup of containers](#arrow_down-setup-of-containers)
     + [:whale: Using Sail](#whale-using-sail)
 
-## :mag: About the API
+## :desktop_computer: About the Web Application...
+
+### :brazil: County search
+
+Just a simple page with a field to input the county code that you wants to look for.
+
+The page is reactive, so, after the search about the county code, the result will appear in the same page without reload or redirect 🔁.
+
+## :mag: About the API...
 
 ### :books: First of all, documentation!
 
