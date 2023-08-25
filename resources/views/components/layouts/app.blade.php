@@ -11,7 +11,7 @@
 
         @vite('resources/css/app.css')
     </head>
-    <body>
+    <body class="bg-teal-950 text-white">
         {{ $slot }}
     </body>
 </html>
