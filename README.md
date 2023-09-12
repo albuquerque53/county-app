@@ -97,61 +97,25 @@ So, this is why the [IbgeCountyService are currently blocked](https://github.com
 
 ### :arrow_down: Setup of containers
 
-1 - First, configure the environment:
+1 - First, build the environment:
 ```sh
-make env
+make build 
 ```
+> **:warning: This command you just need to run once, if you alread runned this, you can start from step 2.**
 
-2 - Now, create the containers:
+2 - Now, you can just start the back and front-end servers with:
 ```sh
-make start
+make up_d 
 ```
 
-3 - Get into the laravel container:
+3 - Run the tests to check if everything is ok:
 ```
-make attach
-```
-
-4 - Now, install the dependencies:
-```sh
-make install
+make test 
 ```
 
-5 - For last, generate the application key:
-```sh
-make key
-```
-
-6 - Well, now you have everything installed, can exit from container:
-```sh
-exit
-```
-
-7 - And stopping them:
+4 - To stop the application:
 ```sh
 make stop
 ```
 
-> These steps are only for first time using this project, after running that you'll have everything configured to use Laravel Sail.
-
-### :whale: Using Sail
-
-> Laravel provides Laravel Sail that are a helper for docker operations, we gonna use it.
-
-* For start the application, you can run...
-```
-# will serve the API on localhost:80
-vendor/bin/sail up
-``` 
-
-* Or if you want to run the tests...
-```
-vendor/bin/sail test
-```
-
-* Or even if you want to install something
-```sh
-vendor/bin/sail composer require ...
-```
-
-Basically, everything you want to do that needs the PHP of the Laravel container you can do with "vendor/bin/sail <command>"
+> From now, everything you want to run in the PHP inside the Laravel container you can do with "vendor/bin/sail <command>", example: `vendor/bin/sail artisan make:model MyModel`.
