@@ -4,9 +4,9 @@ build:
 	docker exec -t county_app sh -c "composer install && php artisan key:generate"
 	exit
 	npm install
+	npm run build
 	docker-compose down
 up:
-	npm run build
 	vendor/bin/sail up
 up_d:
 	vendor/bin/sail up -d
