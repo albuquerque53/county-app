@@ -118,4 +118,4 @@ make test
 make stop
 ```
 
-> From now, everything you want to run in the PHP inside the Laravel container you can do with "vendor/bin/sail <command>", example: `vendor/bin/sail artisan make:model MyModel`.
+> From now, everything you want to run in the PHP inside the Laravel container you can do with `vendor/bin/sail <command>`, example: `vendor/bin/sail artisan make:model MyModel`.
